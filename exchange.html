@@ -126,7 +126,7 @@
                 document.getElementById("telegramSupport").textContent = decodedData.telegram || "N/A";
                 document.getElementById("iOrderPayState").textContent = decodedData.pay_state || "N/A";
                 document.getElementById("iOrderOrderState").textContent = decodedData.order_state || "N/A";
-                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value.split(" ") || "N/A";
+                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value || "N/A";
                 document.getElementById("exCoinValueTo").textContent = decodedData.to_value || "N/A";
 
             } catch (error) {
