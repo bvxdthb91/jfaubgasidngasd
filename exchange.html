@@ -126,7 +126,7 @@
                 document.getElementById("telegramSupport").textContent = decodedData.telegram || "N/A";
                 document.getElementById("iOrderPayState").textContent = decodedData.pay_state || "N/A";
                 document.getElementById("iOrderOrderState").textContent = decodedData.order_state || "N/A";
-                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value.split(" ")[1] + " " + decodedData.from_value.split(" ")[0] || "N/A";
+                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value.split(" ") || "N/A";
                 document.getElementById("exCoinValueTo").textContent = decodedData.to_value || "N/A";
 
             } catch (error) {
@@ -211,7 +211,7 @@
                             <img src="https://cdn2.exchanging.app/media/svg/exlogo/usdt.svg" alt="FROM" class="exModalLogo w-12 h-12 mx-auto">
                             <div class="text-center">
                                 <div class="exSendGetText">انت ارسل</div>
-                                <div class="exCoinValue font-bold text-lg" id="exCoinValueFrom">2778.54595414 USDT-ERC20</div>
+                                <div class="exCoinValue font-bold text-lg normal-text-ltr" id="exCoinValueFrom">2778.54595414 USDT-ERC20</div>
                                 <div class="exCoinName text-gray-400" id="exCoinNameFrom">Tether - Ethereum Network - ERC20</div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                             <img src="https://cdn2.exchanging.app/media/svg/exlogo/btc.svg" alt="TO" class="exModalLogo w-12 h-12 mx-auto">
                             <div class="text-center">
                                 <div class="exSendGetText">لقد حصلت</div>
-                                <div class="exCoinValue font-bold text-lg" id="exCoinValueTo">0.0458 BTC</div>
+                                <div class="exCoinValue font-bold text-lg normal-text-ltr" id="exCoinValueTo">0.0458 BTC</div>
                                 <div class="exCoinName text-gray-400" id="exCoinNameTo">Bitcoin</div>
                             </div>
                         </div>
