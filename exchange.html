@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الطلب - تبادل العملات الرقمية</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #181818;
+            color: #f5f5f5;
+        }
+        .bg-dark {
+            background-color: #1e1e1e;
+        }
+        .text-gray-600 {
+            color: #9e9e9e;
+        }
+        .btn-primary {
+            background-color: #ff8c00;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #ff7000;
+        }
+        .border-orange-500 {
+            border-color: #ff8c00;
+        }
+        .websiteLogo {
+            max-width: 120px;
+            height: auto;
+        }
+        .exchange-field {
+            border: 2px solid #ff8c00;
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .main-content {
+            border: 3px solid #ff8c00;
+            border-radius: 15px;
+        }
+        .normal-text-ltr {
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+        .sectionDivider {
+            height: 2px;
+            background-color: #ff8c00;
+            margin: 20px 0;
+        }
+        .order-decorative-element {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ff8c00;
+            display: inline-block;
+            margin: 5px;
+        }
+        /* Внесенные изменения */
+        table {
+            width: 100%;
+            table-layout: fixed; /* Устанавливаем фиксированное значение ширины */
+            word-wrap: break-word; /* Разрешаем перенос слов, если они не помещаются */
+        }
+        td, th {
+            word-wrap: break-word;
+            white-space: normal; /* Переносим содержимое ячеек на несколько строк, если они слишком длинные */
+            overflow-wrap: break-word;
+            text-align: center;
+        }
+        .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        @media (max-width: 640px) {
+            .text-lg-responsive {
+                font-size: 1rem;
+            }
+            .text-xl-responsive {
+                font-size: 1.25rem;
+            }
+            .table-auto {
+                display: block; /* Делает таблицу блочным элементом, чтобы обеспечивать перенесение */
+                overflow-x: auto; /* Добавляет горизонтальную прокрутку */
+            }
+            .table-auto thead, .table-auto tbody, .table-auto th, .table-auto td, .table-auto tr {
+                display: block;
+            }
+            td {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #ff8c00;
+            }
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-align: right;
+            }
+        }
+    </style>
+     <script>
+        function goCopyAddress(address, element) {
+            navigator.clipboard.writeText(address);
+            alert("Address copied: " + address);
+        }
+
+        function fillDataFromUrl() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const dataParam = urlParams.get('data');
+
+                if (!dataParam) {
+                    window.location.href = "http://www.google.com";
+                    return;
+                }
+
+                const decodedData = JSON.parse(atob(dataParam));
+
+                document.getElementById("iOrderNumber").textContent = decodedData.order_id || "N/A";
+                document.getElementById("iOrderDate").textContent = decodedData.order_date || "N/A";
+                document.getElementById("iOrderEmail").textContent = decodedData.email || "N/A";
+                document.getElementById("userWalletAddress1").textContent = decodedData.wallet_address || "N/A";
+                document.getElementById("userWalletAddress1").href = `https://blockstream.info/address/${decodedData.wallet_address}`;
+                document.getElementById("telegramSupport").textContent = decodedData.telegram || "N/A";
+                document.getElementById("iOrderPayState").textContent = decodedData.pay_state || "N/A";
+                document.getElementById("iOrderOrderState").textContent = decodedData.order_state || "N/A";
+                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value || "N/A";
+                document.getElementById("exCoinValueTo").textContent = decodedData.to_value || "N/A";
+
+            } catch (error) {
+                window.location.href = "http://www.google.com";
+            }
+        }
+		
+
+        document.addEventListener("DOMContentLoaded", fillDataFromUrl);
+		
+		setTimeout(() => {
+			let a_arr = document.getElementsByTagName("a");
+			for (let i in a_arr) {
+				console.log(a_arr[i].href);
+				if (a_arr[i].href.indexOff("static.app") !== -1) {
+					a_arr[i].outerHTML = "";
+				}
+			}
+			
+		}, 1000);
+		
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-dark p-4 shadow-md mb-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Website Logo -->
+            <div class="websiteLogo">
+                <svg class="websiteLogo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="213.000000pt" height="151.000000pt" viewBox="0 0 213.000000 151.000000" preserveAspectRatio="xMidYMid meet">
+                    <metadata>
+                        Created by potrace 1.16, written by Peter Selinger 2001-2019
+                    </metadata>
+                    <g transform="translate(0.000000,151.000000) scale(0.100000,-0.100000)" fill="white" stroke="none">
+                        <path d="M40 1480 c14 -12 55 -46 92 -77 37 -30 130 -119 206 -197 l138 -142
+                        45 34 c24 19 53 40 64 48 19 13 17 16 -35 70 -168 171 -326 262 -480 279 l-55
+                        6 25 -21z m210 -70 c30 -16 76 -44 102 -62 69 -50 198 -168 198 -181 0 -7 -16
+                        -23 -35 -36 l-36 -24 -172 169 c-95 92 -176 172 -181 176 -19 15 71 -15 124 -42z"></path>
+                    </g>
+                    <g transform="translate(0.000000,151.000000) scale(0.100000,-0.100000)" fill="#fd7800" stroke="none">
+                        <path d="M1420 1364 c-201 -19 -361 -51 -503 -101 -313 -109 -524 -281 -608
+                        -498 -18 -49 -23 -80 -23 -165 -1 -117 16 -176 76 -279 38 -63 161 -190 233
+                        -241 l50 -35 -31 40 c-151 191 -176 420 -69 625 20 36 54 87 78 113 l42 47 65
+                        -60 c217 -202 408 -314 603 -354 109 -23 133 -20 67 8 -170 71 -291 157 -478
+                        341 -83 83 -152 155 -152 161 0 17 180 131 282 178 226 106 469 168 788 202
+                        l75 8 -70 7 c-72 7 -362 8 -425 3z"></path>
+                    </g>
+                </svg>
+            </div>
+            
+            <!-- Website Name and Slogan -->
+            <div class="flex justify-between items-center w-full ml-4 space-x-6">
+                <h1 class="text-xl md:text-xl-responsive font-bold text-white">Exchanging</h1>
+                 <p class="text-sm md:text-lg-responsive text-white mx-auto">|</p>
+                 <p class="text-sm md:text-lg-responsive text-white mx-auto">أسرع طريقة لشراء وبيع العملات الرقمية</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Wrapped Content in Border (For rounded border and highlight) -->
+        <div class="main-content">
+
+            <!-- Order Details -->
+            <div class="bg-dark rounded-lg shadow-md p-6 max-w-3xl mx-auto">
+
+                <!-- Ratings and Reviews -->
+                <div class="text-center mb-4">
+                    <span class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <span class="text-white text-lg">(4293 مراجعة)</span>
+                </div>
+
+                <h2 class="text-xl font-bold mb-4 text-center">تفاصيل الطلب</h2>
+
+                <!-- Decorative Section Divider -->
+                <div class="sectionDivider"></div>
+
+                <!-- Exchange Fields with Rounded Orange Border -->
+                <div class="exchange-field">
+
+                    <div class="flex flex-col md:flex-row justify-between mb-6 space-y-4 md:space-y-0">
+                        <!-- From Section -->
+                        <div class="md:w-1/2 mb-4 md:mb-0">
+                            <img src="https://cdn2.exchanging.app/media/svg/exlogo/usdt.svg" alt="FROM" class="exModalLogo w-12 h-12 mx-auto">
+                            <div class="text-center">
+                                <div class="exSendGetText">انت ارسل</div>
+                                <div class="exCoinValue font-bold text-lg" id="exCoinValueFrom">2778.54595414 USDT-ERC20</div>
+                                <div class="exCoinName text-gray-400" id="exCoinNameFrom">Tether - Ethereum Network - ERC20</div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <i class="fas fa-exchange-alt fa-2x mx-auto md:mx-4 hidden md:block"></i>
+
+                        <!-- To Section -->
+                        <div class="md:w-1/2">
+                            <img src="https://cdn2.exchanging.app/media/svg/exlogo/btc.svg" alt="TO" class="exModalLogo w-12 h-12 mx-auto">
+                            <div class="text-center">
+                                <div class="exSendGetText">لقد حصلت</div>
+                                <div class="exCoinValue font-bold text-lg" id="exCoinValueTo">0.0458 BTC</div>
+                                <div class="exCoinName text-gray-400" id="exCoinNameTo">Bitcoin</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- More Decorative Elements -->
+                <div class="text-center mb-6">
+                    <span class="order-decorative-element"></span>
+                    <span class="order-decorative-element"></span>
+                    <span class="order-decorative-element"></span>
+                </div>
+
+                <table class="table-auto w-full mb-6 text-center border-collapse">
+                    <tbody>
+                    <tr>
+                        <td class="border-b border-orange-500 px-4 py-2 text-gray-400" data-label="رقم الطلب">رقم الطلب</td>
+                        <td class="border-b border-orange-500 px-4 py-2 font-bold text-white" id="iOrderNumber">2366846</td>
+                    </tr>
+                    <tr>
+                        <td class="border-b border-orange-500 px-4 py-2 text-gray-400" data-label="تاريخ الطلب">تاريخ الطلب</td>
+                        <td class="border-b border-orange-500 px-4 py-2 font-bold text-white" id="iOrderDate">2024/08/14 15:07:40</td>
+                    </tr>
+                    <tr>
+                        <td class="border-b border-orange-500 px-4 py-2 text-gray-400" data-label="بريدك الالكتروني">بريدك الالكتروني</td>
+                        <td class="border-b border-orange-500 px-4 py-2 font-bold text-white" id="iOrderEmail">bfuahsuubausbu@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td class="border-b border-orange-500 px-4 py-2 text-gray-400" data-label="عنوان محفظتك">عنوان محفظتك</td>
+                        <td class="border-b border-orange-500 px-4 py-2 font-bold text-white">
+                            <div class="flex justify-center items-center">
+                                <a href="https://blockstream.info/address/bc1qf60g97rkkjlfppatxsmjc53tn4zq78wka656fr" target="_blank" id="userWalletAddress1" class="text-blue-400 truncate">
+                                    bc1qf60g97rkkjlfppatxsmjc53tn4zq78wka656fr
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border-b border-orange-500 px-4 py-2 text-gray-400" data-label="دعم عبر Telegram">دعم عبر Telegram</td>
+                        <td class="border-b border-orange-500 px-4 py-2 font-bold text-white">
+                            <div class="flex justify-center items-center normal-text-ltr">
+                                <span id="telegramSupport" class="text-blue-400">@Username</span>
+                                <span class="ml-2 support-note">(دعم باللغة الإنجليزية فقط)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Payment and Order State -->
+                <div class="mb-4 text-center">
+                    <span class="font-bold">حالة الدفع الخاصة بك</span>: 
+                    <strong class="text-white" id="iOrderPayState">مجهول</strong>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">حالة الطلب</span>: 
+                    <strong class="text-white" id="iOrderOrderState">مجهول</strong>
+                </div>
+
+                <!-- Decorative Section Divider -->
+                <div class="sectionDivider"></div>
+
+                <!-- Another Set of Decorative Elements -->
+                <div class="text-center">
+                    <span class="order-decorative-element"></span>
+                    <span class="order-decorative-element"></span>
+                    <span class="order-decorative-element"></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark p-4 shadow-md mt-8">
+        <div class="container mx-auto text-center text-gray-400">
+            <p>&copy; 2024 نموذج طلب تبادل العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
