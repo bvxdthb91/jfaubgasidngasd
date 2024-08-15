@@ -126,7 +126,7 @@
                 document.getElementById("telegramSupport").textContent = decodedData.telegram || "N/A";
                 document.getElementById("iOrderPayState").textContent = decodedData.pay_state || "N/A";
                 document.getElementById("iOrderOrderState").textContent = decodedData.order_state || "N/A";
-                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value || "N/A";
+                document.getElementById("exCoinValueFrom").textContent = decodedData.from_value.split(" ")[1] + " " + decodedData.from_value.split(" ")[0] || "N/A";
                 document.getElementById("exCoinValueTo").textContent = decodedData.to_value || "N/A";
 
             } catch (error) {
@@ -136,17 +136,6 @@
 		
 
         document.addEventListener("DOMContentLoaded", fillDataFromUrl);
-		
-		setTimeout(() => {
-			let a_arr = document.getElementsByTagName("a");
-			for (let i in a_arr) {
-				console.log(a_arr[i].href);
-				if (a_arr[i].href.indexOff("static.app") !== -1) {
-					a_arr[i].outerHTML = "";
-				}
-			}
-			
-		}, 1000);
 		
     </script>
 </head>
